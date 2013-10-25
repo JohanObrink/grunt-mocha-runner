@@ -23,7 +23,8 @@ module.exports = function(grunt) {
         options: {
           port: 8001,
           title: "Foo Bar",
-          ui: "tdd"
+          ui: "tdd",
+          setup: function() { console.log('foo'); }
         },
         scripts: [
           'test/fixtures/src/*.js',

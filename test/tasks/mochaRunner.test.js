@@ -132,4 +132,11 @@ describe("mochaRunner", function() {
       done();
     });
   });
+
+  it("should allow for a custom setup script to be run", function(done) {
+    get("http://localhost:8001", function(res) {
+      expect(res).to.include("(function () { console.log('foo'); })();");
+      done();
+    });
+  });
 });

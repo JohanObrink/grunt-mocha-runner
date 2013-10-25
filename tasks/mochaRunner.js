@@ -37,6 +37,9 @@ module.exports = function(grunt) {
       port: 8000,
       hostname: 'localhost'
     });
+    if(options.setup) {
+      options.setup = '(f)();'.replace('f', options.setup.toString());
+    }
 
     if (options.hostname === '*') { options.hostname = null; }
 
