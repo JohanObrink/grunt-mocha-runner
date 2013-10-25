@@ -47,6 +47,14 @@ describe("mochaRunner", function() {
     });
   });
 
+  it("should only run mocha if not in phantom", function(done) {
+    get("http://localhost:8000", function(res) {
+      expect(res).to.include("if(navigator.userAgent.indexOf('PhantomJS')<0){mocha.run();}");
+
+      done();
+    });
+  });
+
   it("should serve the configured stylesheets", function(done) {
     var i = 2;
 

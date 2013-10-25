@@ -24,6 +24,6 @@
         <script src="<%= script %>"></script>
     <% }); %>
 
-    <script>mocha.run()</script>
+    <script>if(navigator.userAgent.indexOf('PhantomJS')<0){mocha.run();}</script>
 </body>
 </html>
