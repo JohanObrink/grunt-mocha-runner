@@ -1,7 +1,7 @@
 {
   "name": "grunt-mocha-runner",
   "description": "Serve a mocha runner page with the source and spec script paths configured in your Gruntfile",
-  "version": "0.2.1",
+  "version": "0.2.3",
   "homepage": "",
   "author": {
     "name": "justinvdm"
@@ -36,6 +36,10 @@
     "connect": "~2.8.5",
     "tmp": "0.0.21",
     "chai": "~1.7.2",
-    "mocha": "~1.12.0"
+    "mocha": "~1.12.0",
+    "glob": "~3.2.8",
+    "lodash": "~2.4.1",
+    "sinon": "~1.7.3",
+    "sinon-chai": "~2.4.0"
   }
 }

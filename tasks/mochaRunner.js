@@ -2,7 +2,9 @@ module.exports = function(grunt) {
   var path = require('path'),
       connect = require('connect'),
       tmp = require('tmp'),
-      fs = require('fs');
+      fs = require('fs'),
+      glob = require('glob'),
+      _ = require('lodash');
 
   function linkInDir(srcpath, dirpath) {
     var destpath = path.join(dirpath, path.basename(srcpath));
@@ -52,10 +54,16 @@ module.exports = function(grunt) {
       linkInDir(path.join(modulesDir, 'chai', 'chai.js'), dirpath);
       linkInDir(path.join(modulesDir, 'mocha', 'mocha.js'), dirpath);
       linkInDir(path.join(modulesDir, 'mocha', 'mocha.css'), dirpath);
+      linkInDir(path.join(modulesDir, 'sinon', 'pkg', 'sinon.js'), dirpath);
+      linkInDir(path.join(modulesDir, 'sinon-chai', 'lib', 'sinon-chai.js'), dirpath);
       linkInDir(process.env.PWD, dirpath);
 
       // NOTE: 'src' and 'spec' are deprecated and will be removed in v1.0.0
-      data.scripts = (data.scripts || []).concat(data.src || [], data.spec || []);
+      data.scripts = _.flatten(_.flatten((data.scripts || []).concat(data.src || [], data.spec || []))
+        .map(function(src) {
+          if(src.indexOf('*') >= 0) return glob.sync(src);
+          else return src;
+        }));
 
       buildRunner(dirpath, {
        options: options,
